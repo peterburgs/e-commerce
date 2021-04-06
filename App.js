@@ -7,14 +7,12 @@ import Header from "./Shared/Header";
 
 // Import Screens
 import ProductContainer from "./Screens/Products/ProductContainer";
-import DemoIcon from "./Screens/Products/DemoIcon";
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* <Header />
+      <Header />
       <ProductContainer />
-      <StatusBar style="auto" /> */}
-      <DemoIcon />
+      <StatusBar style="auto" />
     </View>
   );
 }

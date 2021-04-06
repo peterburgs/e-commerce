@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Image, StyleSheet, Dimensions, View, ScrollView } from "react-native";
 import Swiper from "react-native-swiper/src";
 
-var { width } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 const Banner = () => {
   const [bannerData, setBannerData] = useState([]);
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   imageBanner: {
     height: width / 2,
     width: width - 40,
-    borderRadius: 10,
+    borderRadius: 25,
     marginHorizontal: 20,
   },
 });

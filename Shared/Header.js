@@ -22,5 +22,6 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
     padding: 10,
+    marginBottom: 5,
   },
 });
