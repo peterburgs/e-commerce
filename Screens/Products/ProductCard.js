@@ -8,7 +8,7 @@ import {
   Button,
 } from "react-native";
 
-// Get device spec
+//! Get device spec
 const { width, height } = Dimensions.get("window");
 
 const ProductCard = (props) => {
@@ -24,7 +24,7 @@ const ProductCard = (props) => {
             : "https://static1.squarespace.com/static/5a51022ff43b55247f47ccfc/5a567854f9619a96fd6233bb/5b74446c40ec9afbc633e555/1534346950637/Husqvarna+545FR+%282%29.png?format=1500w",
         }}
       />
-      <View style={styles.card}></View>
+      <View style={styles.card} />
       <Text style={styles.title}>
         {name.length > 15 ? name.substring(0, 15 - 3) + "..." : name}
       </Text>
