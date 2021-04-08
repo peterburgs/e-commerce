@@ -84,10 +84,10 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     backgroundColor: "#fff",
+    margin: 15,
   },
   price: {
     fontSize: 20,
-    margin: 20,
     color: "red",
   },
 });
