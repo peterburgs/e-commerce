@@ -16,6 +16,7 @@ import ProductList from "./ProductList";
 import SearchedProducts from "./SearchedProducts";
 import Banner from "../../Shared/Banner";
 import CategoryFilter from "./CategoryFilter";
+import { useLinkProps } from "@react-navigation/native";
 
 // Get mockup data
 const data = require("../../assets/data/products.json");
@@ -25,7 +26,7 @@ const productCategories = require("../../assets/data/categories.json");
 const { width, height } = Dimensions.get("window");
 
 // Declare component
-const ProductContainer = () => {
+const ProductContainer = (props) => {
   // States
   const [products, setProducts] = useState([]);
   const [productsFiltered, setProductsFiltered] = useState([]);
@@ -103,7 +104,10 @@ const ProductContainer = () => {
       </Header>
 
       {focus === true ? (
-        <SearchedProducts productsFiltered={productsFiltered} />
+        <SearchedProducts
+          productsFiltered={productsFiltered}
+          navigation={props.navigation}
+        />
       ) : (
         <ScrollView style={styles.container}>
           <View>
@@ -122,7 +126,13 @@ const ProductContainer = () => {
             {productsCtg.length > 0 ? (
               <View style={styles.listContainer}>
                 {productsCtg.map((item) => {
-                  return <ProductList key={item.name} item={item} />;
+                  return (
+                    <ProductList
+                      key={item.name}
+                      item={item}
+                      navigation={props.navigation}
+                    />
+                  );
                 })}
               </View>
             ) : (
