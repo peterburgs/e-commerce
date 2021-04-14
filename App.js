@@ -9,19 +9,23 @@ import store from "./Redux/store";
 
 // Navigators
 import Main from "./Navigators/Main";
+
 // Import components
 import Header from "./Shared/Header";
 
 // Import Screens
 import ProductContainer from "./Screens/Products/ProductContainer";
+import { createStackNavigator } from "@react-navigation/stack";
 
 // Define main App
 export default function App() {
   return (
-    <NavigationContainer>
-      <Header />
-      <Main />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Header />
+        <Main />
+      </NavigationContainer>
+    </Provider>
   );
 }
 

@@ -8,6 +8,11 @@ import {
   Button,
 } from "react-native";
 
+import { connect } from "react-redux";
+
+// Cart actions
+import * as actions from "../../Redux/Actions/cartActions";
+
 //! Get device spec
 const { width, height } = Dimensions.get("window");
 
@@ -31,7 +36,13 @@ const ProductCard = (props) => {
       <Text style={styles.price}>${price}</Text>
       {countInStock > 0 ? (
         <View style={{ marginBottom: 50 }}>
-          <Button title={"Add"} color={"green"} />
+          <Button
+            title={"Add"}
+            color={"green"}
+            onPress={() => {
+              return props.addItemToCart(props);
+            }}
+          />
         </View>
       ) : (
         <Text style={{ marginTop: 20 }}>Currently Unavailable</Text>
@@ -40,7 +51,20 @@ const ProductCard = (props) => {
   );
 };
 
-export default ProductCard;
+// Map Dispatch to Props
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addItemToCart: (product) =>
+      dispatch(
+        actions.addToCart({
+          quantity: 1,
+          product,
+        })
+      ),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ProductCard);
 
 const styles = StyleSheet.create({
   container: {
