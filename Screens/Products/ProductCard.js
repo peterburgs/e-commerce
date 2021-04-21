@@ -10,6 +10,8 @@ import {
 
 import { connect } from "react-redux";
 
+// BaseURL
+import baseURL from "../../assets/common/baseUrl";
 // Cart actions
 import * as actions from "../../Redux/Actions/cartActions";
 
@@ -18,6 +20,7 @@ const { width, height } = Dimensions.get("window");
 
 const ProductCard = (props) => {
   const { name, price, image, countInStock } = props;
+
   return (
     <View style={styles.container}>
       <Image
@@ -25,7 +28,7 @@ const ProductCard = (props) => {
         resizeMode={"contain"}
         source={{
           uri: image
-            ? image
+            ? `${baseURL}${image}`
             : "https://static1.squarespace.com/static/5a51022ff43b55247f47ccfc/5a567854f9619a96fd6233bb/5b74446c40ec9afbc633e555/1534346950637/Husqvarna+545FR+%282%29.png?format=1500w",
         }}
       />
