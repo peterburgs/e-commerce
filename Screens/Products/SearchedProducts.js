@@ -10,9 +10,9 @@ const SearchedProducts = (props) => {
   return (
     <Content style={{ width: width }}>
       {productsFiltered.length > 0 ? (
-        productsFiltered.map((item) => (
+        productsFiltered.map((item, index) => (
           <ListItem
-            key={item._id}
+            key={index}
             avatar
             onPress={props.navigation.navigate("Product Detail", {
               item: item,

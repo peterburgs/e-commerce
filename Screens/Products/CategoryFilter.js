@@ -36,10 +36,10 @@ const CategoryFilter = (props) => {
           </Badge>
         </TouchableOpacity>
 
-        {props.categories.map((item) => {
+        {props.categories.map((item, index) => {
           return (
             <TouchableOpacity
-              key={item._id}
+              key={index}
               onPress={() => {
                 props.categoryFilter(item._id);
                 props.setActive(props.categories.indexOf(item));

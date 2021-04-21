@@ -64,21 +64,19 @@ const Confirm = (props) => {
   );
 };
 
-// Map dispatch to Props
 const mapDispatchToProps = (dispatch) => {
   return {
     clearCart: () => dispatch(actions.clearCart()),
   };
 };
-
 export default connect(null, mapDispatchToProps)(Confirm);
 
 const styles = StyleSheet.create({
   container: {
     height: height,
-    padding: 8,
+    padding: 10,
     alignContent: "center",
-    backgroundColor: "#FFF",
+    backgroundColor: "#FFFFF0",
   },
   titleContainer: {
     justifyContent: "center",
@@ -98,7 +96,7 @@ const styles = StyleSheet.create({
     width: width / 1.2,
   },
   body: {
-    margin: 10,
+    margin: 8,
     alignItems: "center",
     flexDirection: "row",
   },
