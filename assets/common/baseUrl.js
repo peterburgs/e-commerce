@@ -1,3 +1,3 @@
-const baseURL = "https://6db132761a49.ngrok.io/api/v1";
+const baseURL = "https://peter-e-commerce.herokuapp.com";
 
-export default baseURL;
+export default `${baseURL}/api/v1`;
