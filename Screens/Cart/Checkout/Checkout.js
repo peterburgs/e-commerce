@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Button, View, TouchableOpacity } from "react-native";
 import { Item, Picker } from "native-base";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -13,18 +13,31 @@ const countries = require("../../../assets/data/countries.json");
 
 // Redux
 import { connect } from "react-redux";
+import AuthGlobal from "../../../Context/store/AuthGlobal";
 
 const Checkout = (props) => {
+  const context = useContext(AuthGlobal);
   // States
   const [orderItems, setOrderItems] = useState();
   const [shippingAddress, setShippingAddress] = useState();
   const [city, setCity] = useState();
   const [phone, setPhone] = useState();
   const [country, setCountry] = useState();
-
+  const [user, setUser] = useState();
   // UseEffect
   useEffect(() => {
     setOrderItems(props.cartItems);
+    if (context.stateUser.isAuthenticated) {
+      setUser(context.stateUser.user._id);
+    } else {
+      props.navigation.navigate("Cart");
+      Toast.show({
+        topOffset: 60,
+        type: "error",
+        text1: "Please Login to Checkout",
+        text2: "",
+      });
+    }
     return () => {
       setOrderItems();
     };
@@ -37,6 +50,9 @@ const Checkout = (props) => {
       dateCreated: Date.now(),
       orderItems,
       shippingAddress,
+      phone,
+      status: "3",
+      user,
     };
     props.navigation.navigate("Payment", { order: order });
   };
