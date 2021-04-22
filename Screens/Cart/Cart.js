@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -23,6 +23,7 @@ import { connect } from "react-redux";
 import * as actions from "../../Redux/Actions/cartActions";
 import CartItem from "./CartItem";
 import EasyButton from "../../Shared/StyledComponents/EasyButton";
+import AuthGlobal from "../../Context/store/AuthGlobal";
 // BaseURL
 import baseURL from "../../assets/common/baseUrl";
 // Get device spec
@@ -30,6 +31,7 @@ const { width, height } = Dimensions.get("window");
 
 // JSX
 const Cart = (props) => {
+  const context = useContext(AuthGlobal);
   // Calculate total price of cart
   let total = 0;
   props.cartItems.forEach((e) => {
@@ -80,15 +82,23 @@ const Cart = (props) => {
               </EasyButton>
             </Right>
             <Right>
-              <EasyButton
-                primary
-                medium
-                onPress={() => props.navigation.navigate("Checkout")}
-              >
-                <Text style={{ color: "white", fontWeight: "bold" }}>
-                  Checkout
-                </Text>
-              </EasyButton>
+              {context.stateUser.isAuthenticated ? (
+                <EasyButton
+                  primary
+                  medium
+                  onPress={() => props.navigation.navigate("Checkout")}
+                >
+                  <Text style={{ color: "white" }}>Checkout</Text>
+                </EasyButton>
+              ) : (
+                <EasyButton
+                  secondary
+                  medium
+                  onPress={() => props.navigation.navigate("Login")}
+                >
+                  <Text style={{ color: "white" }}>Login</Text>
+                </EasyButton>
+              )}
             </Right>
           </View>
         </Container>

@@ -41,6 +41,7 @@ const LogIn = (props) => {
   useEffect(() => {
     // Check if user is authenticated
     if (context.stateUser.isAuthenticated) {
+      console.log(context.stateUser.isAuthenticated);
       props.navigation.navigate("UserProfile");
     }
   }, [context.stateUser.isAuthenticated]);
