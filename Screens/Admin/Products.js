@@ -9,11 +9,14 @@ import {
   Button,
 } from "react-native";
 
-import { Header, Item, Input, Icon } from "native-base";
+import { Header, Item, Input } from "native-base";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { useFocusEffect } from "@react-navigation/native";
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
-import AsyncStorage from "@react-native-community/async-storage";
+import EasyButton from "../../Shared/StyledComponents/EasyButton";
+// import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import ListItem from "./ListItem";
 
 // Device spec
@@ -51,8 +54,9 @@ const Products = (props) => {
   // useEffect
   useFocusEffect(
     useCallback(() => {
-      AsyncStorage.getItem(token)
+      AsyncStorage.getItem("token")
         .then((token) => {
+          console.log("*** ", token);
           setToken(token);
         })
         .catch((err) => {
@@ -86,15 +90,54 @@ const Products = (props) => {
       )
     );
   };
+  // Delete product
+  const deleteProduct = (id) => {
+    console.log(token);
+    axios
+      .delete(`${baseURL}/products/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        const products = productFilter.filter((item) => item._id != id);
+        setProductFilter(products);
+      })
+      .catch((err) => console.log(err.message));
+  };
 
   // JSX
   return (
-    <View>
-      {/*// Search bar */}
+    <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        <EasyButton
+          secondary
+          medium
+          onPress={() => props.navigation.navigate("Orders")}
+        >
+          <Icon name={"shopping-bag"} size={18} color={"white"} />
+          <Text style={styles.buttonText}>Orders</Text>
+        </EasyButton>
+        <EasyButton
+          secondary
+          medium
+          onPress={() => props.navigation.navigate("ProductForm")}
+        >
+          <Icon name={"plus"} size={18} color={"white"} />
+          <Text style={styles.buttonText}>Products</Text>
+        </EasyButton>
+        <EasyButton
+          secondary
+          medium
+          onPress={() => props.navigation.navigate("Categories")}
+        >
+          <Icon name={"plus"} size={18} color={"white"} />
+          <Text style={styles.buttonText}>Categories</Text>
+        </EasyButton>
+      </View>
       <View>
         <Header rounded searchBar>
           <Item style={{ padding: 5 }}>
-            <Icon name="ios-search" style={{ fontSize: 20, color: "black" }} />
+            <Icon name="search" style={{ fontSize: 20, color: "black" }} />
 
             <Input
               placeholder="Find a product"
@@ -115,7 +158,12 @@ const Products = (props) => {
           data={productFilter}
           renderItem={({ item, index }) => {
             return (
-              <ListItem {...item} navigation={props.navigation} index={index} />
+              <ListItem
+                {...item}
+                navigation={props.navigation}
+                index={index}
+                deleteProduct={deleteProduct}
+              />
             );
           }}
           keyExtractor={(item) => item._id}
