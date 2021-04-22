@@ -7,8 +7,13 @@ import {
   Image,
   Button,
 } from "react-native";
+import { connect } from "react-redux";
 import { Left, Right, Container, H1 } from "native-base";
-
+import Toast from "react-native-toast-message";
+// BaseURL
+import baseURL from "../../assets/common/baseUrl";
+// Cart actions
+import * as actions from "../../Redux/Actions/cartActions";
 // Define component
 const SingleProduct = (props) => {
   // State
@@ -25,7 +30,7 @@ const SingleProduct = (props) => {
             resizeMode={"contain"}
             source={{
               uri: item.image
-                ? item.image
+                ? `${baseURL}${item.image}`
                 : "https://static1.squarespace.com/static/5a51022ff43b55247f47ccfc/5a567854f9619a96fd6233bb/5b74446c40ec9afbc633e555/1534346950637/Husqvarna+545FR+%282%29.png?format=1500w",
             }}
             style={styles.image}
@@ -41,14 +46,38 @@ const SingleProduct = (props) => {
           <Text style={styles.price}>${item.price}</Text>
         </Left>
         <Right>
-          <Button title={"Add"} />
+          <Button
+            title={"Add"}
+            onPress={() => {
+              Toast.show({
+                topOffset: 60,
+                type: "success",
+                text1: `${item.name} is added to cart`,
+                text2: `$${item.price}`,
+              });
+              return props.addItemToCart(props);
+            }}
+          />
         </Right>
       </View>
     </Container>
   );
 };
 
-export default SingleProduct;
+// Map Dispatch to Props
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addItemToCart: (product) =>
+      dispatch(
+        actions.addToCart({
+          quantity: 1,
+          product,
+        })
+      ),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SingleProduct);
 
 const styles = StyleSheet.create({
   container: {

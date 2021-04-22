@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, Left, Right, ListItem, Thumbnail, Body } from "native-base";
-
+// BaseURL
+import baseURL from "../../assets/common/baseUrl";
 const CartItem = (props) => {
   const data = props.item.item.product;
   const [quantity, setQuantity] = useState(props.item.quantity);
@@ -11,7 +12,7 @@ const CartItem = (props) => {
         <Thumbnail
           source={{
             uri: data.image
-              ? data.image
+              ? `${baseURL}${data.image}`
               : "https://static1.squarespace.com/static/5a51022ff43b55247f47ccfc/5a567854f9619a96fd6233bb/5b74446c40ec9afbc633e555/1534346950637/Husqvarna+545FR+%282%29.png?format=1500w",
           }}
         />

@@ -12,24 +12,26 @@ const Stack = createStackNavigator();
 // Define HomeNavigator component
 const HomeNavigator = () => {
   return (
-    <Stack.Navigator>
-      {/*// Stack of Home */}
-      <Stack.Screen
-        name="Home"
-        component={ProductContainer}
-        options={{
-          headerShown: false,
-        }}
-      />
-      {/*// Stack of Product detail*/}
-      <Stack.Screen
-        name="Product Detail"
-        component={SingleProduct}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack.Navigator>
+    <>
+      <Stack.Navigator>
+        {/*// Stack of Home */}
+        <Stack.Screen
+          name="Home"
+          component={ProductContainer}
+          options={{
+            headerShown: false,
+          }}
+        />
+        {/*// Stack of Product detail*/}
+        <Stack.Screen
+          name="Product Detail"
+          component={SingleProduct}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack.Navigator>
+    </>
   );
 };
 
