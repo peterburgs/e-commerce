@@ -9,7 +9,7 @@ import FormContainer from "../../Shared/Form/FormContainer";
 import Input from "../../Shared/Form/Input";
 import Error from "../../Shared/Error";
 import baseURL from "../../assets/common/baseUrl";
-
+import EasyButton from "../../Shared/StyledComponents/EasyButton";
 const Register = (props) => {
   //  States
   const [email, setEmail] = useState("");
@@ -108,15 +108,20 @@ const Register = (props) => {
           onChangeText={(text) => setPhone(text)}
         />
         <View style={styles.buttonGroup}>
-          <Button title={"Register"} onPress={handleSubmit} />
+          <EasyButton primary medium onPress={handleSubmit}>
+            <Text style={{ color: "white" }}>Register</Text>
+          </EasyButton>
         </View>
         {error ? <Error message={error} /> : null}
         <View style={[styles.buttonGroup, { marginTop: 40 }]}>
           <Text style={styles.middleText}>Already had have an account?</Text>
-          <Button
-            title={"Login"}
+          <EasyButton
+            secondary
+            medium
             onPress={() => props.navigation.navigate("Login")}
-          />
+          >
+            <Text style={{ color: "white" }}>Login</Text>
+          </EasyButton>
         </View>
       </FormContainer>
     </KeyboardAwareScrollView>

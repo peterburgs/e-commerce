@@ -22,6 +22,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { connect } from "react-redux";
 import * as actions from "../../Redux/Actions/cartActions";
 import CartItem from "./CartItem";
+import EasyButton from "../../Shared/StyledComponents/EasyButton";
 // BaseURL
 import baseURL from "../../assets/common/baseUrl";
 // Get device spec
@@ -67,17 +68,27 @@ const Cart = (props) => {
               <Text style={styles.price}>$ {total}</Text>
             </Left>
             <Right>
-              <Button
-                title={"Clear Cart"}
+              <EasyButton
+                danger
+                medium
                 style={{ color: "red" }}
                 onPress={() => props.clearCart()}
-              />
+              >
+                <Text style={{ color: "white", fontWeight: "bold" }}>
+                  Clear Cart
+                </Text>
+              </EasyButton>
             </Right>
             <Right>
-              <Button
-                title={"Checkout"}
+              <EasyButton
+                primary
+                medium
                 onPress={() => props.navigation.navigate("Checkout")}
-              />
+              >
+                <Text style={{ color: "white", fontWeight: "bold" }}>
+                  Checkout
+                </Text>
+              </EasyButton>
             </Right>
           </View>
         </Container>

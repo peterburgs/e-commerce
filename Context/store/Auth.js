@@ -20,7 +20,6 @@ const Auth = (props) => {
     setShowChild(true);
     const token = AsyncStorage.getItem("token").then((res) => {
       if (res) {
-        console.log(24);
         if (setShowChild) {
           dispatch(setCurrentUser(jwt_decode(res)));
         }

@@ -1,43 +1,40 @@
 import React, { useState } from "react";
 import {
+  View,
   StyleSheet,
   Text,
-  View,
-  TouchableHighlight,
+  Image,
+  TouchableHighLight,
   TouchableOpacity,
   Dimensions,
   Button,
-  Image,
   Modal,
 } from "react-native";
-import { Icon } from "native-base";
-
-// base URL
+import Icon from "react-native-vector-icons/FontAwesome";
+import EasyButton from "../../Shared/StyledComponents/EasyButton";
 import baseURL from "../../assets/common/baseUrl";
 
-// Device Specs
-
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 const ListItem = (props) => {
-  // State
-  const [visibility, setVisibility] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
-  // JSX
   return (
     <View>
       <Modal
-        animationType={"fade"}
+        animationType="fade"
         transparent={true}
-        visible={visibility}
-        onRequestClose={() => setVisibility(false)}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(false);
+        }}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <TouchableOpacity
               underlayColor="#E8E8E8"
               onPress={() => {
-                setVisibility(false);
+                setModalVisible(false);
               }}
               style={{
                 alignSelf: "flex-end",
@@ -48,51 +45,59 @@ const ListItem = (props) => {
             >
               <Icon name="close" size={20} />
             </TouchableOpacity>
-            <Button
-              title={"Edit"}
+            <EasyButton
+              medium
+              secondary
               onPress={() => [
-                props.navigation.navigate("ProductForm"),
-                console.log(55),
-                setVisibility(false),
+                props.navigation.navigate("ProductForm", { item: props }),
+                setModalVisible(false),
               ]}
-            />
-            <Button title={"Delete"} />
+            >
+              <Text style={styles.textStyle}>Edit</Text>
+            </EasyButton>
+            <EasyButton
+              medium
+              danger
+              onPress={() => [props.delete(props._id), setModalVisible(false)]}
+            >
+              <Text style={styles.textStyle}>Delete</Text>
+            </EasyButton>
           </View>
         </View>
       </Modal>
       <TouchableOpacity
-        style={[
-          styles.container,
-          { backgroundColor: props.index % 2 == 0 ? "#fff" : "gainsboro" },
-        ]}
         onPress={() => {
           props.navigation.navigate("Product Detail", { item: props });
         }}
-        onLongPress={() => setVisibility(true)}
+        onLongPress={() => setModalVisible(true)}
+        style={[
+          styles.container,
+          {
+            backgroundColor: props.index % 2 == 0 ? "white" : "gainsboro",
+          },
+        ]}
       >
         <Image
           source={{
             uri: props.image
               ? `${baseURL}${props.image}`
-              : "https://static1.squarespace.com/static/5a51022ff43b55247f47ccfc/5a567854f9619a96fd6233bb/5b74446c40ec9afbc633e555/1534346950637/Husqvarna+545FR+%282%29.png?format=1500w",
+              : "https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png",
           }}
           resizeMode="contain"
           style={styles.image}
         />
         <Text style={styles.item}>{props.brand}</Text>
-        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.item}>
+        <Text style={styles.item} numberOfLines={1} ellipsizeMode="tail">
           {props.name}
         </Text>
-        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.item}>
+        <Text style={styles.item} numberOfLines={1} ellipsizeMode="tail">
           {props.category.name}
         </Text>
-        <Text style={styles.item}>${props.price}</Text>
+        <Text style={styles.item}>$ {props.price}</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-export default ListItem;
 
 const styles = StyleSheet.create({
   container: {
@@ -103,7 +108,7 @@ const styles = StyleSheet.create({
   image: {
     borderRadius: 50,
     width: width / 6,
-    height: 30,
+    height: 20,
     margin: 2,
   },
   item: {
@@ -137,3 +142,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+export default ListItem;
