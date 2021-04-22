@@ -8,13 +8,24 @@ import Icon from "react-native-vector-icons/FontAwesome";
 // Import Components
 import HomeNavigator from "./HomeNavigator";
 import CartNavigator from "./CartNavigator";
+import UserNavigator from "./UserNavigator";
+import AdminNavigator from "./AdminNavigator";
+
+// Import Auth Context
+import AuthGlobal from "../Context/store/AuthGlobal";
+
+// Import icon
 import CartIcon from "../Shared/CartIcon";
+import Auth from "../Context/store/Auth";
 
 // Create Tab
 const Tab = createBottomTabNavigator();
 
 // Define component
 const Main = () => {
+  const context = useContext(AuthGlobal);
+
+  // JSX
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -26,7 +37,7 @@ const Main = () => {
     >
       {/* // Home Tab  */}
       <Tab.Screen
-        name="home"
+        name="Home"
         component={HomeNavigator}
         options={{
           tabBarIcon: ({ color }) => {
@@ -57,22 +68,23 @@ const Main = () => {
         }}
       />
       {/* // Admin Tab (only available to admin)*/}
-      <Tab.Screen
-        name="Admin"
-        // TODO: Change into Admin
-        component={HomeNavigator}
-        options={{
-          tabBarIcon: ({ color }) => {
-            return <Icon name="cog" color={color} size={30} />;
-          },
-        }}
-      />
+
+      {context.stateUser.user.isAdmin == true ? (
+        <Tab.Screen
+          name="Admin"
+          component={AdminNavigator}
+          options={{
+            tabBarIcon: ({ color }) => {
+              return <Icon name="cog" color={color} size={30} />;
+            },
+          }}
+        />
+      ) : null}
 
       {/* // User Tab */}
       <Tab.Screen
         name="User"
-        // TODO: Change into User
-        component={HomeNavigator}
+        component={UserNavigator}
         options={{
           tabBarIcon: ({ color }) => {
             return <Icon name="user" color={color} size={30} />;

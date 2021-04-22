@@ -7,7 +7,7 @@ import {
   Image,
   Button,
 } from "react-native";
-
+import Toast from "react-native-toast-message";
 import { connect } from "react-redux";
 
 // BaseURL
@@ -43,6 +43,12 @@ const ProductCard = (props) => {
             title={"Add"}
             color={"green"}
             onPress={() => {
+              Toast.show({
+                topOffset: 60,
+                type: "success",
+                text1: `${name} is added to cart`,
+                text2: `$${price}`,
+              });
               return props.addItemToCart(props);
             }}
           />

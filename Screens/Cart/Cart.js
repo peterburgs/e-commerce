@@ -22,6 +22,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { connect } from "react-redux";
 import * as actions from "../../Redux/Actions/cartActions";
 import CartItem from "./CartItem";
+// BaseURL
+import baseURL from "../../assets/common/baseUrl";
 // Get device spec
 const { width, height } = Dimensions.get("window");
 
