@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import FormContainer from "../../Shared/Form/FormContainer";
 import Input from "../../Shared/Form/Input";
 import Error from "../../Shared/Error";
+import EasyButton from "../../Shared/StyledComponents/EasyButton";
 
 // Context
 import AuthGlobal from "../../Context/store/AuthGlobal";
@@ -65,15 +66,20 @@ const LogIn = (props) => {
         secureTextEntry={true}
       />
       <View style={styles.buttonGroup}>
-        <Button title={"Login"} onPress={handleSubmit} />
+        <EasyButton primary medium onPress={handleSubmit}>
+          <Text style={{ color: "white" }}>Login</Text>
+        </EasyButton>
       </View>
       {error ? <Error message={error} /> : null}
       <View style={[styles.buttonGroup, { marginTop: 40 }]}>
         <Text style={styles.middleText}>Haven't had have an account yet?</Text>
-        <Button
-          title={"Register"}
+        <EasyButton
+          secondary
+          medium
           onPress={() => props.navigation.navigate("Register")}
-        />
+        >
+          <Text style={{ color: "white" }}>Register</Text>
+        </EasyButton>
       </View>
     </FormContainer>
   );

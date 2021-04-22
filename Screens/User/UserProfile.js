@@ -7,7 +7,7 @@ import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 import AuthGlobal from "../../Context/store/AuthGlobal";
 import { logoutUser } from "../../Context/actions/Auth.actions";
-
+import EasyButton from "../../Shared/StyledComponents/EasyButton";
 // Define component
 const UserProfile = (props) => {
   const context = useContext(AuthGlobal);
@@ -57,13 +57,16 @@ const UserProfile = (props) => {
           </Text>
         </View>
         <View style={{ marginTop: 80 }}>
-          <Button
-            title={"Logout"}
+          <EasyButton
+            danger
+            medium
             onPress={() => {
               AsyncStorage.removeItem("token");
               logoutUser(context.dispatch);
             }}
-          />
+          >
+            <Text style={{ color: "white", fontWeight: "bold" }}>Logout</Text>
+          </EasyButton>
         </View>
       </ScrollView>
     </Container>
