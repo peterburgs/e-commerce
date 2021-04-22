@@ -24,7 +24,7 @@ const UserNavigator = () => {
       />
       {/* // Stack of Profile */}
       <Stack.Screen
-        name="User Profile"
+        name="UserProfile"
         component={UserProfile}
         options={{ headerShown: false }}
       />

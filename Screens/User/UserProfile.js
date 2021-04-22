@@ -2,7 +2,9 @@ import React, { useCallback, useContext, useState, useEffect } from "react";
 import { StyleSheet, Text, View, ScrollView, Button } from "react-native";
 import { Container } from "native-base";
 import { useFocusEffect } from "@react-navigation/native";
-import AsyncStorage from "@react-native-community/async-storage";
+// import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 import AuthGlobal from "../../Context/store/AuthGlobal";

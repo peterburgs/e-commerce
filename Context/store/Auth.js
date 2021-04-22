@@ -1,6 +1,8 @@
 import React, { useState, useReducer, useEffect } from "react";
 import jwt_decode from "jwt-decode";
-import AsyncStorage from "@react-native-community/async-storage";
+// import AsyncStorage from "@react-native-community/async-storage";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Auth reducer
 import authReducer from "../reducers/Auth.reducer";
